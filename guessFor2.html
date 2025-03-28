@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Личный сайт студента ВГУИТ</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript">
+
+		var answer = parseInt(Math.random() * 100);
+		var currentPlayer = 1; // 1 - игрок 1, 2 - игрок 2
+
+		function readInt(){
+			var number = document.getElementById("userAnswer").value;
+			return parseInt(number);
+		}
+
+		function write(text){
+			document.getElementById("info").innerHTML = text;
+		}
+
+		function hide(id){
+			document.getElementById(id).style.display = "none";
+		}
+
+		function guess(){
+			var userAnswer = readInt();
+			if (isNaN(userAnswer)) {
+				write("Введите корректное число от 0 до 100");
+				return;
+			}
+
+			if(userAnswer === answer){
+				write("<b>Поздравляем, игрок " + currentPlayer + " угадал число!</b>");
+				hide("button");
+				hide("userAnswer");
+			} else {
+				if(userAnswer > answer){
+					write("Игрок " + currentPlayer + ", вы ввели слишком большое число");
+				} else {
+					write("Игрок " + currentPlayer + ", вы ввели слишком маленькое число");
+				}
+
+				// Переключение между игроками
+				currentPlayer = (currentPlayer === 1) ? 2 : 1;
+				document.getElementById("currentPlayer").innerHTML = "Ход игрока: " + currentPlayer;
+			}
+		}
+
+	</script>
+</head>
+<body>
+
+<div class="content">
+	<div class="header">
+		<a href="index.html">Главная</a>
+		<a href="puzzle.html">Загадки</a>
+		<a href="#">Угадайка MP</a>
+		<a href="password.html">RandomPass</a>
+	</div>
+
+	<div class="contentWrap">
+		<div class="content">
+			<div class="center">
+
+				<h1>Игра Угадайка на двоих</h1>
+
+				<div class="box">
+
+					<p id="info">Давайте попробуем отгадать число от 0 до 100</p>
+					<p id="currentPlayer">Ход игрока: 1</p>
+					<input type="text" id="userAnswer">
+					<br>
+					<a href="#" onClick="guess();" id="button">Сделать ход</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<div class="footer">
+	Copyright &copy;PotapovRoman
+	<div>
+
+</body>
+</html>
